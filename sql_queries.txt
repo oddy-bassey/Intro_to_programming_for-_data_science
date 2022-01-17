@@ -1,0 +1,26 @@
+
+//select query
+
+SELECT * FROM table
+
+SELECT tableColumn1, tableColumn2, tableColumn2 FROM table
+
+// select query with limit
+
+SELECT id, account_id, total_amt_usd
+FROM orders 
+LIMIT 20
+
+// select query with order by and limit (sorting)
+
+SELECT id, account_id, total_amt_usd
+FROM orders
+ORDER BY total_amt_usd 
+LIMIT 20
+
+// select query with order by and limit (sorting by multiple columns)
+
+SELECT id, account_id, total_amt_usd
+FROM orders
+ORDER BY account_id, total_amt_usd DESC
+LIMIT 20
