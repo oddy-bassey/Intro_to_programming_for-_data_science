@@ -1,26 +1,75 @@
 
-//select query
+//SELECT query
 
 SELECT * FROM table
 
 SELECT tableColumn1, tableColumn2, tableColumn2 FROM table
 
-// select query with limit
+// SELECT query with LIMIT
 
 SELECT id, account_id, total_amt_usd
 FROM orders 
 LIMIT 20
 
-// select query with order by and limit (sorting)
+// SELECT query with ORDER BY and LIMIT (sorting)
 
 SELECT id, account_id, total_amt_usd
 FROM orders
 ORDER BY total_amt_usd 
 LIMIT 20
 
-// select query with order by and limit (sorting by multiple columns)
+// SELECT query with ORDER BY and LIMIT (sorting by multiple columns)
 
 SELECT id, account_id, total_amt_usd
 FROM orders
 ORDER BY account_id, total_amt_usd DESC
 LIMIT 20
+
+// SELECT query with WHERE clause
+SELECT *
+FROM orders
+WHERE total_amt_usd < 500
+LIMIT 10
+
+// SELECT query with ARITHMETIC operators
+
+SELECT id, account_id, 
+   poster_amt_usd/(standard_amt_usd + gloss_amt_usd + poster_amt_usd) AS post_per
+FROM orders
+LIMIT 10;
+
+// SELECT query with LIKE clause
+
+// string a the end
+SELECT name
+FROM accounts
+WHERE name LIKE '%s';
+
+// string in between
+SELECT name
+FROM accounts
+WHERE name LIKE '%one%';
+
+//string at the beginning
+SELECT name
+FROM accounts
+WHERE name LIKE 'C%';
+
+// SELECT query with IN clause
+
+SELECT name, primary_poc, sales_rep_id
+FROM accounts
+WHERE name IN ('Walmart', 'Target', 'Nordstrom');
+
+// SELECT query with NOT clause
+
+SELECT name, primary_poc, sales_rep_id
+FROM accounts
+WHERE name NOT IN ('Walmart', 'Target', 'Nordstrom');
+
+SELECT name
+FROM accounts
+WHERE name NOT LIKE '%one%'; // or '%s' or C%'
+
+
+
