@@ -43,7 +43,7 @@ LIMIT 10;
 // string a the end
 SELECT name
 FROM accounts
-WHERE name LIKE '%s';
+WHERE name LIKE '%s'; 
 
 // string in between
 SELECT name
@@ -71,5 +71,70 @@ SELECT name
 FROM accounts
 WHERE name NOT LIKE '%one%'; // or '%s' or C%'
 
+// SELECT query with AND & BETWEEN clause
 
+// AND clause
+SELECT * 
+FROM orders
+WHERE standard_qty > 1000 AND poster_qty = 0 AND gloss_qty = 0;
+
+// BETWEEN clause
+
+SELECT occurred_at, gloss_qty 
+FROM orders
+WHERE gloss_qty BETWEEN 24 AND 29;
+
+// SELECT query with OR clause
+
+// example 1
+
+SELECT id
+FROM orders
+WHERE gloss_qty > 4000 OR poster_qty > 4000
+
+// exampe 2
+
+SELECT id
+FROM orders
+WHERE standard_qty = 0 AND (gloss_qty > 1000 OR poster_qty > 1000)
+
+// example 3
+
+SELECT name
+FROM accounts
+WHERE (name LIKE 'C%' OR name LIKE 'W%') AND ((primary_poc LIKE '%ana%' OR primary_poc LIKE '%Ana%') AND primary_poc NOT LIKE '%eana%');
+
+// SELECT query with JOIN clause
+
+// example 1
+
+SELECT orders.standard_qty, orders.gloss_qty, 
+       orders.poster_qty,  accounts.website, 
+       accounts.primary_poc
+FROM orders
+JOIN accounts
+ON orders.account_id = accounts.id
+
+// example 2
+
+SELECT r.name region, a.name account, 
+       o.total_amt_usd/(o.total + 0.01) unit_price
+FROM region r
+JOIN sales_reps s
+ON s.region_id = r.id
+JOIN accounts a
+ON a.sales_rep_id = s.id
+JOIN orders o
+ON o.account_id = a.id;
+
+//filtering with joins lesson2 : episode 18
+
+SELECT region.name regioName, salesRep.name salesRepName, acc.name accountName
+FROM region
+JOIN sales_reps salesRep
+ON region.id = salesRep.region_id
+JOIN accounts acc
+ON salesRep.id = acc.sales_rep_id
+AND region.name = 'Midwest'
+ORDER BY acc.name
 
